@@ -1,4 +1,4 @@
-#include "args.h"
+#include "hshell.h"
 ssize_t readto_bffr(FILE *stream);
 size_t write_ln(char *line, size_t cpsize);
 static char buffer[BUFFER_SIZE];
@@ -18,6 +18,8 @@ ssize_t _getline(char **line, size_t *lnsz, FILE *stream)
 	size_t tocpy;
 	ssize_t totalrd = 0;
 
+	bffri = 0;
+	bffrsz = 0;
 	if (stream == NULL)
 		return (-1);
 	if (*line == NULL || *lnsz == 0)
@@ -37,11 +39,15 @@ ssize_t _getline(char **line, size_t *lnsz, FILE *stream)
 		{
 			tocpy = write_ln((*line + totalrd), (*lnsz - totalrd));
 			totalrd += tocpy;
-			return (totalrd);
+			if ((*line)[totalrd - 1] == '\n')
+			{
+				(*line)[totalrd] = '\0';
+				return (totalrd);
+			}
 		}
 
 		if (readto_bffr(stream) <= 0)
-			return (totalrd);
+			return (totalrd > 0 ? totalrd : -1);
 
 		if (totalrd + bffri > *lnsz)
 		{
@@ -65,9 +71,9 @@ ssize_t readto_bffr(FILE *stream)
 {
 	int fd = fileno(stream);
 
-	printf("%i ", fd);
+	if (fd < 0)
+		return (-1);
 	bffrsz = read(fd, buffer, BUFFER_SIZE);
-	printf("%lu\n", (unsigned long)bffrsz);
 	bffri = 0;
 	return (bffrsz);
 }
@@ -84,7 +90,7 @@ size_t write_ln(char *line, size_t cpsize)
 
 	if (tocpy > cpsize)
 		tocpy = cpsize;
-	line = (char *)memcpy(line, (buffer + bffri), tocpy);
+	memcpy(line, (buffer + bffri), tocpy);
 	bffri += tocpy;
 	return (tocpy);
 }
