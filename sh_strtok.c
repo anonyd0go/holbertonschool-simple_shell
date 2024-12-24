@@ -1,34 +1,42 @@
-#include "args.h"
+#include "hshell.h"
 
 /**
  * _strtok - Custom strtok fucntion
  * @str: String to tokenize
  * @delim: Delimiter character
- * Return: Pointer to the next_tok tok;
+ * Return: Pointer to the start_tok tok;
  */
 char *_strtok(char *str, const char *delim)
 {
-    static char *token_line;
-    static char *next_tok;
-    char *tok;
+    static char *token_ptr = NULL;
+    char *start_tok = NULL;
+    char *end_tok = NULL;
 
-    if (str)
-        token_line = str;
-    if (!token_line)
+    if (str != NULL)
+        token_ptr = str;
+    if (token_ptr == NULL)
         return (0);
-    next_tok = token_line;
-    while (*next_tok)
+
+    start_tok = token_ptr;
+    while (*start_tok && strchr(delim, *start_tok))
+        start_tok++;
+    if (*start_tok == '\0')
     {
-        if (strchr(delim, *next_tok))
-        {
-            *next_tok = '\0';
-            tok = token_line;
-            token_line = next_tok + 1;
-            return (tok);
-        }
-        next_tok++;
+        token_ptr = NULL;
+        return (0);
     }
-    tok = token_line;
-    token_line = NULL;
-    return (tok);
+
+    end_tok = start_tok;
+    while (*end_tok && !strchr(delim, *end_tok))
+        end_tok++;
+
+    if (*end_tok == '\0')
+        token_ptr = NULL;
+    else
+    {
+        *end_tok = '\0';
+        token_ptr = end_tok + 1;
+    }
+
+    return (start_tok);
 }
