@@ -1,5 +1,5 @@
 #include "hshell.h"
-char *find_var(char *envv, char **env);
+char *find_var(char *envar, char **env);
 char *rm_name(char *var, char *envar);
 
 
@@ -28,18 +28,18 @@ char *_getenv(char *envar)
 
 /**
  * find_var - finds the desired enfironment variable
- * @envv: Environ var to look for
+ * @envar: Environ var to look for
  * @env: Environment
  * Return: Full environment var, or NULL if fails
  */
-char *find_var(char *envv, char **env)
+char *find_var(char *envar, char **env)
 {
 	int found;
 	size_t i = 0, j, envsize;
 
-	if (envv == NULL || env == NULL)
+	if (envar == NULL || env == NULL)
 		return (0);
-	envsize = _strlen(envv);
+	envsize = _strlen(envar);
 	if (envsize == 0)
 		return (0);
 	while (env[i] != NULL)
@@ -47,7 +47,7 @@ char *find_var(char *envv, char **env)
 		found = 1;
 		for (j = 0; j < envsize; j++)
 		{
-			if (env[i][j] != envv[j])
+			if (env[i][j] != envar[j])
 				found = 0;
 			if (found == 0)
 				break;
