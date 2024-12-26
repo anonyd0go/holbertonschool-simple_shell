@@ -11,6 +11,10 @@
 #include <errno.h>
 
 #define BUFFER_SIZE 1024
+#define EXIT_OK 1
+#define EXIT_FAIL 0
+#define BI_OK 1
+#define BI_FAIL 0
 extern char **environ;
 
 /**
@@ -23,6 +27,17 @@ typedef struct singly
 	char *path;
 	struct singly *next;
 } sll_t;
+
+/**
+ * struct builtins - struct for builtins
+ * @name: name of the builtin
+ * @f: function pointer to the builtin
+ */
+typedef struct builtins
+{
+	char *name;
+	int (*f)(char **args);
+} builtin_t;
 
 /* Main Utils */
 char *shelline(void);
@@ -53,6 +68,8 @@ void freeargs(char **args);
 void siginit_hndl(int sig);
 
 /* Built-ins */
+int exec_builtins(char **args);
 int is_exit(char **args);
+int is_env(char **args);
 
 #endif
