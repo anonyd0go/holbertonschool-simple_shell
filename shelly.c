@@ -1,5 +1,6 @@
 #include "hshell.h"
-volatile sig_atomic_t sigint_f = 0;
+static sig_atomic_t sigint_f = 1;
+
 /**
  * main - entry point of the shell (shelly)
  * Return: 0 on success
