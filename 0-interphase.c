@@ -107,17 +107,9 @@ int exe_cmd(char **args, char *cmd_path)
 {
 	pid_t pid;
 	int status;
-	int i;
 
 	if (args == NULL || args[0] == NULL)
 		return (0);
-	
-	/*Debbug print*/
-	printf("cmd_path exec: %s\n", cmd_path);
-	for (i = 0; args[i] != NULL; i++)
-	{
-		printf("args[%d]: %s\n", i, args[i]);
-	}
 
 	pid = fork();
 	if (pid == 0)
