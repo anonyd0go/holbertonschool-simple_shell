@@ -81,3 +81,25 @@ char *rm_name(char *var, char *envar)
 
 	return (var);
 }
+
+
+/**
+ * cmd_exists - checks if the command exists
+ * @args: arguments to check
+ * @head_path: head of the path
+ * Return: Full path to command
+ */
+char *cmd_exists(char **args, sll_t *head_path)
+{
+	char *cmd_fullpath = NULL;
+
+	if (args == NULL || args[0] == NULL || head_path == NULL)
+		return (0);
+	if (strcmp(args[0], "exit") == 0)
+		return (0);
+
+	cmd_fullpath = find_cmd(args[0], head_path);
+	if (cmd_fullpath == NULL)
+		return (0);
+	return (cmd_fullpath);
+}
