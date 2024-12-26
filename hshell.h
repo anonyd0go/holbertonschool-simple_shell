@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <errno.h>
@@ -27,6 +28,10 @@ typedef struct singly
 char *shelline(void);
 char **getav(char *line);
 int execute(char **args);
+void flag_prmpt(sig_atomic_t sig);
+/*Execute*/
+char *cmd_exists(char **args, sll_t *head_path);
+int exe_cmd(char **args, char *cmd_path);
 
 /* IO */
 ssize_t _getline(char **line, size_t *lnsz, FILE *stream);
@@ -38,10 +43,16 @@ char *_getenv(char *envar);
 sll_t *list_path(sll_t **head, char *path);
 void free_sll(sll_t **head);
 size_t sll_size(sll_t *head);
+char *find_cmd(char *cmd, sll_t *head);
+sll_t *init_path(char *path);
 
 /* Helpers */
 size_t _strlen(char *str);
 char **realloc_args(char **args, size_t pos, size_t size);
 void freeargs(char **args);
+void siginit_hndl(int sig);
+
+/* Built-ins */
+int is_exit(char **args);
 
 #endif
