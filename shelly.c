@@ -32,6 +32,12 @@ int main(void)
 			freeargs(args);
 			return (0);
 		}
+		if (exec_builtins(args))
+		{
+			free(line);
+			freeargs(args);
+			continue;
+		}
 		status = execute(args);
 
 		free(line);
