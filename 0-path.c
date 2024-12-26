@@ -114,7 +114,6 @@ char *find_cmd(char *cmd, sll_t *head)
 		fullpath = strcpy(fullpath, tmp->path);
 		fullpath = strcat(fullpath, "/");
 		fullpath = strcat(fullpath, cmd);
-		fullpath = strcat(fullpath, "\0");
 		if (access(fullpath, F_OK) == 0)
 			return (fullpath);
 		free(fullpath);
@@ -131,13 +130,22 @@ char *find_cmd(char *cmd, sll_t *head)
 sll_t *init_path(char *path)
 {
 	sll_t *head = NULL;
+	char *path_cp;
 
 	if (path == NULL)
 	{
 		perror("Error: failed to get PATH");
 		return (0);
 	}
-	list_path(&head, path);
+
+	path_cp = strdup(path);
+	if (path_cp == NULL)
+	{
+		perror("Error: failed to copy PATH");
+		return (0);
+	}
+	list_path(&head, path_cp);
+	free(path_cp);
 	if (head == NULL)
 	{
 		perror("Error: failed to list path");
