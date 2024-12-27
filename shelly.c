@@ -9,14 +9,16 @@ int main(void)
 {
 	char *line = NULL;
 	char **args;
-	int status = 1;
+	int status = 1, eof_sig = 0;
 
 	signal(SIGINT, siginit_hndl);
 	do {
 		printf("(흫_흫):$ ");
 		fflush(stdout);
 		flag_prmpt(sigint_f);
-		line = shelline();
+		line = shelline(&eof_sig);
+		if (eof_sig)
+			break;
 		if (line == NULL)
 			continue;
 		args = getav(line);
