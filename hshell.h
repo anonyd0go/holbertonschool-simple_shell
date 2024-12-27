@@ -40,7 +40,7 @@ typedef struct builtins
 } builtin_t;
 
 /* Main Utils */
-char *shelline(void);
+char *shelline(int *eof_sig);
 char **getav(char *line);
 int execute(char **args);
 void flag_prmpt(sig_atomic_t sig);
@@ -71,5 +71,6 @@ void siginit_hndl(int sig);
 int exec_builtins(char **args);
 int is_exit(char **args);
 int is_env(char **args);
+int is_getenv(char **args);
 
 #endif
