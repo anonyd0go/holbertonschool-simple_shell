@@ -1,1 +1,88 @@
-This will be the manual page for the simple shell
+./" Manpage for Holberton shchool simple shell (Shelly).
+.TH man 1 "26 Dec 2024" "simple shell man page"
+
+.SH NAME
+.B hsh
+- simple shell studying program for Holberton School
+
+.SH SYNOPSIS
+.B ./hsh 
+.I [command] [options] [FILE]
+
+.SH DESCRIPTION
+.RB hsh
+This is a end of the year project for students of Holberton Coding School.
+Its purpose is to research, understand, build a working simple shell program.
+.RB Overview
+This simple shell is a simpler iteration of other known shells such as
+.B bash.
+
+.SH OPTIONS
+.RB hsh
+at the moment, operates exclusively in 
+.RI interactive
+mode. The user must run the program inorder to interact with it.
+
+.SH ARGUMENTS
+argument 0 is considered to be the command to run by the
+.RB simple shell.
+The arguments following are flags and modifiers
+.SS INVOCATION
+The functionallity of the simple shell can only be used in 
+.RI interactive
+mode. To exit the shell the user must type the 
+.B "exit"
+ command. At the moment, this command does not support any modifiers.
+"Ctrl+D" does not exit the simple shell.
+When a commend executes in the 
+.RB shell
+ the command will run and a new prompt will appear.
+
+.TP
+.RB Example
+
+$.hsh
+
+(흫_흫):$ ls
+
+example_file    mydir   code_file.c
+
+(흫_흫):$ /bin/ls
+
+example_file    mydir   code_file.c
+
+(흫_흫):$ exit
+
+$
+
+.SS HISTORY
+This simple shell does not support history at the moment
+
+.SS BUILT IN COMMANDS
+.RB exit
+and
+.RB env
+are handled by the simple shell.
+.RB getenv [NAME]
+gets an environment variable
+
+.SH SEE ALSO
+.I sh(1)
+,
+.I bash(1)
+,
+.I _printf(3)
+
+.SH POSIBLE IMPROVEMENTS
+Add the functionallity to exit with "Ctrl+D".
+More built in functionality.
+History functionality
+Include pipping and multiple command functionality
+
+.SH BUGS
+No Known bug , please 
+Report 
+.RB hsh
+bugs to https://github.com/anonyd0go/holbertonschool-simple_shell/issues
+.SH AUTHOR
+Diego Diaz Florez
