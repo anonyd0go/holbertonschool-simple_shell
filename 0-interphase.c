@@ -2,9 +2,10 @@
 
 /**
 * shelline - read a line from the standard input
+* @eof_sig: signal for end of file
 * Return: a pointer to the line read
 */
-char *shelline(void)
+char *shelline(int *eof_sig)
 {
 	char *line = NULL;
 	size_t len = 0;
@@ -17,12 +18,20 @@ char *shelline(void)
 		if (feof(stdin))
 		{
 			free(line);
+			*eof_sig = 1;
 			return (NULL);
 		}
 		free(line);
 		printf("\n");
 		return (NULL);
 	}
+	if (rd == 0)
+	{
+		free(line);
+		*eof_sig = 1;
+		return (NULL);
+	}
+	*eof_sig = 0;
 	return (line);
 }
 
