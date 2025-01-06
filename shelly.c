@@ -1,4 +1,5 @@
 #include "hshell.h"
+void print_prompt(void);
 static sig_atomic_t sigint_f = 1;
 
 /**
@@ -10,10 +11,12 @@ int main(void)
 	char *line = NULL;
 	char **args;
 	int status = 1, eof_sig = 0;
+	int interactive = isatty(STDIN_FILENO);
 
 	signal(SIGINT, siginit_hndl);
 	do {
-		printf("(흫_흫):$ ");
+		if (interactive)
+			print_prompt();
 		flag_prmpt(sigint_f);
 		line = shelline(&eof_sig);
 		if (eof_sig)
@@ -40,7 +43,6 @@ int main(void)
 			continue;
 		}
 		status = execute(args);
-
 		free(line);
 		freeargs(args);
 	} while (status);
@@ -55,4 +57,14 @@ void siginit_hndl(int sig)
 {
 	(void)sig;
 	sigint_f = 1;
+}
+
+/**
+ * print_prompt - prints the prompt
+ * Return: void
+ */
+void print_prompt(void)
+{
+	printf("(흫_흫):$ ");
+	fflush(stdout);
 }
