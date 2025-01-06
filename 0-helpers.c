@@ -36,7 +36,7 @@ char **realloc_args(char **args, size_t pos, size_t size)
 	}
 	else
 	{
-		args = realloc(args, sizeof(char *) * (pos + size));
+		args = _realloc(args, sizeof(char *) * pos, sizeof(char *) * (pos + size));
 		if (args == NULL)
 			return (0);
 	}

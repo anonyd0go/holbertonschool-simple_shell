@@ -54,7 +54,7 @@ ssize_t _getline(char **line, size_t *lnsz, FILE *stream)
 		if (totalrd + bffri > *lnsz)
 		{
 			*lnsz *= 2;
-			*line = realloc(*line, *lnsz);
+			*line = _realloc(*line, *lnsz / 2, *lnsz);
 			if (*line == NULL)
 			{
 				fprintf(stderr, "Faild to realloc");
@@ -71,7 +71,7 @@ ssize_t _getline(char **line, size_t *lnsz, FILE *stream)
  */
 ssize_t readto_bffr(FILE *stream)
 {
-	int fd = fileno(stream);
+	int fd = fileno(stream);  /*Might not be able to use fileno*/
 
 	if (fd < 0)
 		return (-1);

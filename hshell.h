@@ -66,6 +66,7 @@ size_t _strlen(char *str);
 char **realloc_args(char **args, size_t pos, size_t size);
 void freeargs(char **args);
 void siginit_hndl(int sig);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 /* Built-ins */
 int exec_builtins(char **args);
