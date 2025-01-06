@@ -16,7 +16,6 @@ char *shelline(int *eof_sig)
 	if (rd == -1)
 	{
 		free(line);
-		printf("\n");
 		*eof_sig = 1;
 		return (NULL);
 	}
