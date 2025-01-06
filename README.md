@@ -27,6 +27,8 @@ Displays all environment variables
 Displays the desired environment variable
 * exit
 Exits the shell. (At the moment it does not handle arguments)
+* `Ctrl+D`
+Can also be used to exit the simple shell program
 
 ### Commands
 Handles most if not all commands inside the PATH variable

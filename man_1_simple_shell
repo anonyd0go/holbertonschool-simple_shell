@@ -33,7 +33,7 @@ The functionallity of the simple shell can only be used in
 mode. To exit the shell the user must type the 
 .B "exit"
  command. At the moment, this command does not support any modifiers.
-"Ctrl+D" does not exit the simple shell.
+"Ctrl+D" is annother way to exit the program.
 When a commend executes in the 
 .RB shell
  the command will run and a new prompt will appear.
@@ -74,7 +74,6 @@ gets an environment variable
 .I _printf(3)
 
 .SH POSIBLE IMPROVEMENTS
-Add the functionallity to exit with "Ctrl+D".
 More built in functionality.
 History functionality
 Include pipping and multiple command functionality
