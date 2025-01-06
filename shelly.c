@@ -14,7 +14,6 @@ int main(void)
 	signal(SIGINT, siginit_hndl);
 	do {
 		printf("(흫_흫):$ ");
-		fflush(stdout);
 		flag_prmpt(sigint_f);
 		line = shelline(&eof_sig);
 		if (eof_sig)

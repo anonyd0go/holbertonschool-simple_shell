@@ -47,7 +47,9 @@ ssize_t _getline(char **line, size_t *lnsz, FILE *stream)
 		}
 
 		if (readto_bffr(stream) <= 0)
+		{
 			return (totalrd > 0 ? totalrd : -1);
+		}
 
 		if (totalrd + bffri > *lnsz)
 		{
@@ -74,6 +76,8 @@ ssize_t readto_bffr(FILE *stream)
 	if (fd < 0)
 		return (-1);
 	bffrsz = read(fd, buffer, BUFFER_SIZE);
+	if (bffrsz == 0)
+		return (0);
 	bffri = 0;
 	return (bffrsz);
 }

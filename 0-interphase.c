@@ -15,14 +15,8 @@ char *shelline(int *eof_sig)
 	rd = _getline(&line, &len, stdin);
 	if (rd == -1)
 	{
-		if (feof(stdin))
-		{
-			free(line);
-			*eof_sig = 1;
-			return (NULL);
-		}
 		free(line);
-		printf("\n");
+		*eof_sig = 1;
 		return (NULL);
 	}
 	if (rd == 0)
