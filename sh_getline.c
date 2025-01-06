@@ -71,7 +71,7 @@ ssize_t _getline(char **line, size_t *lnsz, FILE *stream)
  */
 ssize_t readto_bffr(FILE *stream)
 {
-	int fd = fileno(stream);  /*Might not be able to use fileno*/
+	int fd = sh_fileno(stream);
 
 	if (fd < 0)
 		return (-1);
